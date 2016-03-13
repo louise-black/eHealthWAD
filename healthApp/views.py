@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from healthApp.forms import CategoryForm, PageForm
 
-from healthApp.forms import UserForm, UserProfileForm
+from healthApp.forms import UserForm, UserProfileForm, UserProfile
 
 def index(request):
 
@@ -46,7 +46,7 @@ def index(request):
     response = render(request,'healthApp/index.html', context_dict)
 
     return response
-    
+
 
 def about(request):
 
@@ -139,6 +139,10 @@ def add_page(request, category_name_slug):
 
     return render(request, 'healthApp/add_page.html', context_dict)
 
+def profile_page(request):
+    user = UserProfile.objects.get(user = request.user)
+    userName = User.objects.get(username = request.user)
+    return render(request, 'profiles/profile_page.html', {'user': user, 'username': username})
 
 from healthApp.bing_search import run_query
 
@@ -154,7 +158,3 @@ def search(request):
             result_list = run_query(query)
 
     return render(request, 'healthApp/search.html', {'result_list': result_list})
-
-
-
-

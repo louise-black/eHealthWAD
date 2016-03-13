@@ -22,20 +22,20 @@
 					{{ field.help_text }}
 					{{ field }}
 				{% endfor %}
-				
+
 				<br/>
 				<button class="btn btn-primary" type="submit" name="submit">Add Category</button>
 			</form>
-			
+
 			{% else %}
-				Sorry you cannot alterate categories if you are not login
+				Sorry you cannot alterate categories if you are not logged in
 				If you want you can <a href="{% url 'register' %}">Register Here</a><br /> or <a href="/{% url 'login' %}">Login</a><br />
 			{% endif %}
 
-           
+
         </form>
 		<br>
-		
-    
+
+
 
 {% endblock %}

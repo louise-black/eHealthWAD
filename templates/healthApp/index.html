@@ -8,26 +8,26 @@
 {% if user.is_authenticated %}
     <div class="page-header">
 
-                <h1>eHealth says... hello {{ user.username }}!</h1>
-            {% else %}
-                <h1>eHealth says... hello world!</h1>
-            {% endif %}
+                <h1>hello {{ user.username }}!</h1>
+    {% else %}
+                <h1></h1>
+    {% endif %}
+
 	</div>
 	<br>
 
-
-	<div class="container">
+  <div class="container">
 	 <div class="row">
 	 <div class="col-sm-3">
 		<div class="panel panel-info">
 		<div class="panel-heading">What is eMedical?</div>
 			<div class="panel-body">
 				eMedical is a non-profit health application that allows users to search a various amount of health-related queries,
-				and they get results from different locations, mainly Bing, Medline and HealthFinder. 
+				and they get results from different locations, mainly Bing, Medline and HealthFinder.
 				Create an account now to save your results and create a neat folder system of all your query results.
 			</div>
 		</div>
-		</div>
+  </div>
 			<br>
 			<br>
 			<br>
@@ -37,7 +37,7 @@
 		<div class="col-sm-5">
         <div class="panel panel-primary">
             <br/>
-			
+
 
             <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
                 {% csrf_token %}
@@ -64,11 +64,11 @@
                     </div>
                 {% endif %}
                 </div>
-            </div>	
+            </div>
 			</div>
 			</div>
 		</div>
 
-	
-       
+
+
         {% endblock %}
