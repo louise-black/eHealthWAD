@@ -1,0 +1,2 @@
+healthApp/forms.py - added a new function & fields to the PageForm class
+healthApp/models.py - added new fields to Page class
