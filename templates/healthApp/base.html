@@ -35,8 +35,12 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search All</a></li>
+                <li><a href="{% url 'bing_search' %}">Search Bing</a></li>
+                <li><a href="{% url 'healthfinder_search' %}">Search Healthfinder</a></li>
+                <li><a href="{% url 'medline_search' %}">Search Medline</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
+                        <li><a href="{% url 'auth_logout' %}?next=/healthApp">Logout</a></li>
                         <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
                     {% else %}
                         <li><a href="{% url 'registration_register' %}">Register Here</a></li>

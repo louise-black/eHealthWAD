@@ -140,7 +140,10 @@ def add_page(request, category_name_slug):
     return render(request, 'healthApp/add_page.html', context_dict)
 
 
-from healthApp.bing_search import run_query
+from healthApp.bing_search import search_bing
+from healthApp.healthfinder_search import search_healthfinder
+from healthApp.medline_search import search_medline
+from healthApp.search_all import search_all
 
 def search(request):
 
@@ -149,11 +152,52 @@ def search(request):
     if request.method == 'POST':
         query = request.POST['query'].strip()
 
+        print query
+
         if query:
-            # Run our Bing function to get the results list!
-            result_list = run_query(query)
+            # Run bing_search function to get the results list
+            result_list = search_all(query)
 
     return render(request, 'healthApp/search.html', {'result_list': result_list})
+
+def bing_search(request):
+
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Run bing_search function to get the results list
+            result_list = search_bing(query)
+
+    return render(request, 'healthApp/bing_search.html', {'result_list': result_list})
+
+def healthfinder_search(request):
+
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Run healthfinder_search function to get the results list
+            result_list = search_healthfinder(query)
+
+    return render(request, 'healthApp/healthfinder_search.html', {'result_list': result_list})
+
+def medline_search(request):
+
+    result_list = []
+
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+
+        if query:
+            # Run medline_search function to get the results list
+            result_list = search_medline(query)
+
+    return render(request, 'healthApp/medline_search.html', {'result_list': result_list})
 
 
 

@@ -2,26 +2,24 @@ import json
 import urllib, urllib2
 import keys
 
-# Add your BING_API_KEY
-
 BING_API_KEY = keys.BING_API_KEY
 
 if __name__ == '__main__':
     main()
 
-def run_query(search_terms):
+def search_bing(search_terms):
     # Specify the base
     root_url = 'https://api.datamarket.azure.com/Bing/Search/'
     source = 'Web'
 
-    # Specify how many results we wish to be returned per page.
+    # Specify how many results to be returned per page.
     # Offset specifies where in the results list to start from.
     # With results_per_page = 10 and offset = 11, this would start from page 2.
     results_per_page = 10
     offset = 0
 
-    # Wrap quotes around our query terms as required by the Bing API.
-    # The query we will then use is stored within variable query.
+    # Wrap quotes around the query terms as required by the Bing API.
+    # The query used is stored within variable query.
     query = "'{0}'".format(search_terms)
     query = urllib.quote(query)
 
@@ -35,15 +33,15 @@ def run_query(search_terms):
         query)
 
     # Setup authentication with the Bing servers.
-    # The username MUST be a blank string, and put in your API key!
+    # The username MUST be a blank string, and put in the API key
     username = ''
 
 
-    # Create a 'password manager' which handles authentication for us.
+    # Create a 'password manager' which handles authentication
     password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
     password_mgr.add_password(None, search_url, username, BING_API_KEY)
 
-    # Create our results list which we'll populate.
+    # Create the results list to populate
     results = []
 
     try:
@@ -65,9 +63,9 @@ def run_query(search_terms):
             'link': result['Url'],
             'summary': result['Description']})
 
-    # Catch a URLError exception - something went wrong when connecting!
+    # Catch a URLError exception - something went wrong when connecting
     except urllib2.URLError as e:
         print "Error when querying the Bing API: ", e
 
-    # Return the list of results to the calling function.
+    # Return the list of results to the calling function
     return results
