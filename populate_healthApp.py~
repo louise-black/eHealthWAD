@@ -39,7 +39,7 @@ def populate():
     diabetes_cat = add_cat("Diabetes")
 
     add_page(cat=diabetes_cat,
-        title="Diabetes UK - Care. Connect. Campaign. - Diabetes UK",
+        title="Diabetes UK – Care. Connect. Campaign. - Diabetes UK",
         url="https://www.diabetes.org.uk/")
 
     add_page(cat=diabetes_cat,
