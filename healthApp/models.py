@@ -2,6 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from datetime import date
+from django.db.models import signals
 
 
 class Category(models.Model):
@@ -36,6 +37,7 @@ class Page(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name = 'profile')
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    website = models.URLField(blank = True)
     dob = models.DateField(default = date.today)
     email = models.EmailField(blank=True)
     GMALE = 'M'
@@ -44,7 +46,7 @@ class UserProfile(models.Model):
     GCHOICES = [(GMALE, 'Male'), (GFEMALE, 'Female'), (GNEUTRAL, 'Gender fluid')]
     gender = models.CharField(max_length = 1, choices = GCHOICES)
     # Override the __unicode__() method to return out something meaningful!
-    def create_user_profile(sender, instance, created, **kwargs)):
+    def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user = instance)
-    post_save.connect(create_user_profile, sender = User)
+    signals.post_save.connect(create_user_profile, sender = User)
