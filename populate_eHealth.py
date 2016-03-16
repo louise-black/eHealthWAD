@@ -1,14 +1,20 @@
 
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+#note: settings is in eHealth_project, not tango_with_django_project
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eHealth_project.settings')
 
 import django
 django.setup()
 
-from rango.models import Category, Page
+#note: healthApp.models not rango.models
+from healthApp.models import Category, Page, UserProfile
+
+#maybe import this? not sure...
+#from django.contrib.auth.models import User
 
 
 def populate():
+
     asthma_cat = add_cat('Asthma')
 
     add_page(cat=asthma_cat,
@@ -40,7 +46,7 @@ def populate():
     diabetes_cat = add_cat("Diabetes")
 
     add_page(cat=diabetes_cat,
-        title="Diabetes UK – Care. Connect. Campaign. - Diabetes UK",
+        title="Diabetes UK - Care. Connect. Campaign. - Diabetes UK",
         url="https://www.diabetes.org.uk/")
 
     add_page(cat=diabetes_cat,
@@ -58,9 +64,9 @@ def populate():
             print "- {0} - {1}".format(str(c), str(p))
 
 def add_page(cat, title, url, views=0, likes=0):
-        p.views=views
 
     p = Page.objects.get_or_create(category=cat, title=title)[0]
+    p.views=views
     p.url=url
 
     p.save()
