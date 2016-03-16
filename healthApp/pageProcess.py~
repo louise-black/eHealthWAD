@@ -5,7 +5,7 @@ from textstat.textstat import textstat
 
 def process(url):
     html = urllib.urlopen(url).read()
-    soup = BeautifulSoup(html, "html.parser")
+    soup = BeautifulSoup(html)
 
     # kill all script and style elements
     for script in soup(["script", "style"]):
