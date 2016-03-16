@@ -142,7 +142,9 @@ def add_page(request, category_name_slug):
 def profile_page(request):
     user = UserProfile.objects.get(user = request.user)
     userName = User.objects.get(username = request.user)
-    return render(request, 'profiles/profile_page.html', {'user': user, 'username': username})
+    return render(request,
+        'profiles/profile_page.html',
+        {'user': user, 'username': userName})
 
 from healthApp.bing_search import run_query
 

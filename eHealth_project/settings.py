@@ -28,7 +28,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'healthApp.UserProfile'
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'healthApp',
     'registration',
    # ' bootstrap_toolkit',
-    'profiles',
 )
 
 MIDDLEWARE_CLASSES = (

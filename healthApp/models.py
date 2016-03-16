@@ -34,8 +34,7 @@ class Page(models.Model):
         return self.title
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    website = models.URLField(blank=True)
+    user = models.OneToOneField(User, related_name = 'profile')
     picture = models.ImageField(upload_to='profile_images', blank=True)
     dob = models.DateField(default = date.today)
     email = models.EmailField(blank=True)
@@ -45,5 +44,7 @@ class UserProfile(models.Model):
     GCHOICES = [(GMALE, 'Male'), (GFEMALE, 'Female'), (GNEUTRAL, 'Gender fluid')]
     gender = models.CharField(max_length = 1, choices = GCHOICES)
     # Override the __unicode__() method to return out something meaningful!
-    def __unicode__(self):
-        return self.user.username
+    def create_user_profile(sender, instance, created, **kwargs)):
+        if created:
+            UserProfile.objects.create(user = instance)
+    post_save.connect(create_user_profile, sender = User)
