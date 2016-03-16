@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 
 from healthApp.forms import CategoryForm, PageForm
 
-from healthApp.forms import UserForm, UserProfileForm
+from healthApp.forms import UserForm, UserProfileForm, UserProfile, User
 
 def index(request):
 
