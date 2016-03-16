@@ -1,10 +1,10 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eHealth_project.settings')
 
 import django
 django.setup()
 
-from rango.models import Category, Page
+from healthApp.models import Category, Page
 
 
 def populate():
@@ -57,9 +57,8 @@ def populate():
             print "- {0} - {1}".format(str(c), str(p))
 
 def add_page(cat, title, url, views=0, likes=0):
-        p.views=views
-        
     p = Page.objects.get_or_create(category=cat, title=title)[0]
+    p.views=views
     p.url=url
     
     p.save()
