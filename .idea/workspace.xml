@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d858fae3-7d6a-4433-97a6-d06a675c1bfe" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="eHealthWAD.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,7 +73,8 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <marker date="1458065001000" expanded="true" signature="0:159" placeholder="import ..." />
+                <marker date="1458065001000" expanded="true" signature="190:431" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -105,8 +107,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/healthApp/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.82589287">
-              <caret line="37" column="59" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.4642857">
+              <caret line="68" column="36" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -144,13 +146,13 @@
         <option value="$PROJECT_DIR$/templates/healthApp/medline_search.html" />
         <option value="$PROJECT_DIR$/keys.py" />
         <option value="$PROJECT_DIR$/templates/healthApp/bing_search.html" />
-        <option value="$PROJECT_DIR$/templates/healthApp/base.html" />
         <option value="$PROJECT_DIR$/healthApp/bing_search.py" />
         <option value="$PROJECT_DIR$/healthApp/healthfinder_search.py" />
         <option value="$PROJECT_DIR$/healthApp/medline_search.py" />
         <option value="$PROJECT_DIR$/healthApp/search_all.py" />
         <option value="$PROJECT_DIR$/healthApp/urls.py" />
         <option value="$PROJECT_DIR$/healthApp/views.py" />
+        <option value="$PROJECT_DIR$/templates/healthApp/base.html" />
       </list>
     </option>
   </component>
@@ -638,7 +640,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#0#28#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -698,7 +700,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <marker date="1458065001000" expanded="true" signature="0:159" placeholder="import ..." />
+            <marker date="1458065001000" expanded="true" signature="190:431" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -751,8 +754,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/healthApp/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82589287">
-          <caret line="37" column="59" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.4642857">
+          <caret line="68" column="36" selection-start-line="68" selection-start-column="36" selection-end-line="68" selection-end-column="36" />
           <folding />
         </state>
       </provider>
