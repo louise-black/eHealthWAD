@@ -1,6 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from datetime import date
+from django.db.models import signals
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
@@ -16,8 +18,8 @@ class Category(models.Model):
             #self.slug = slugify(self.name)
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
-        
-    
+
+
 
     def __unicode__(self):  #For Python 2, use __str__ on Python 3
         return self.name
@@ -30,23 +32,23 @@ class Page(models.Model):
     readability = models.IntegerField(default=0)
     subjectivity = models.IntegerField(default=0)
     polarity = models.IntegerField(default=0)
-    
+
     def __unicode__(self):      #For Python 2, use __str__ on Python 3
         return self.title
 
 class UserProfile(models.Model):
-    # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
-
-    # The additional attributes we wish to include.
-    website = models.URLField(blank=True)
+    user = models.OneToOneField(User, related_name = 'profile')
     picture = models.ImageField(upload_to='profile_images', blank=True)
-
+    website = models.URLField(blank = True)
+    dob = models.DateField(default = date.today)
+    email = models.EmailField(blank=True)
+    GMALE = 'M'
+    GFEMALE = 'F'
+    GNEUTRAL = 'P'
+    GCHOICES = [(GMALE, 'Male'), (GFEMALE, 'Female'), (GNEUTRAL, 'Gender fluid')]
+    gender = models.CharField(max_length = 1, default = 'P', choices = GCHOICES)
     # Override the __unicode__() method to return out something meaningful!
-    def __unicode__(self):
-        return self.user.username
-
-
-
-
-    
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            UserProfile.objects.create(user = instance)
+    signals.post_save.connect(create_user_profile, sender = User)

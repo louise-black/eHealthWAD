@@ -46,7 +46,7 @@ def index(request):
     response = render(request,'healthApp/index.html', context_dict)
 
     return response
-    
+
 
 def about(request):
 
@@ -199,6 +199,9 @@ def medline_search(request):
 
     return render(request, 'healthApp/medline_search.html', {'result_list': result_list})
 
-
-
-
+def profile_page(request):
+    user = UserProfile.objects.get(user = request.user)
+    userName = User.objects.get(username = request.user)
+    return render(request,
+        'profiles/profile_page.html',
+        {'user': user, 'username': userName})
