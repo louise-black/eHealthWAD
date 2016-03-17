@@ -200,7 +200,7 @@ def medline_search(request):
     return render(request, 'healthApp/medline_search.html', {'result_list': result_list})
 
 def profile_page(request):
-    userProfile = UserProfile.objects.get(user = user)
+    userProfile = UserProfile.objects.get(user = request.user)
     return render(request,
         'healthApp/profile_page.html',
         { 'userProfile': userProfile})

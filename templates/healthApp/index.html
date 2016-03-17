@@ -1,8 +1,10 @@
 {% extends 'healthApp/base.html' %} {% load staticfiles %} {% block title %}Index{% endblock %} {% block body_block %} {% if user.is_authenticated %}
-<div class="page-header">
 
-  <h1>hello {{ user.username }}!</h1> {% else %}
+<div class="container">
+  <div class = "jumbotron">
+    <h1> hello {{ user.username }}!</h1> {% else %}
   <h1></h1> {% endif %}
+</div>
 </div>
 <br>
 
@@ -27,6 +29,7 @@
     <div class="col-sm-5">
       <div class="panel panel-primary">
         <br/>
+
 
 
         <form class="form-inline" id="user_form" method="post" action="{% url 'search' %}">
