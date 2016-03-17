@@ -38,10 +38,10 @@ class Page(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name = 'profile')
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-    website = models.URLField(blank = True)
     dob = models.DateField(default = date.today)
-    email = models.EmailField(blank=True)
+    forename = models.CharField(max_length=30, default = '')
+    surname = models.CharField(max_length=30, default = '')
+    email = models.EmailField(blank=True, default = '')
     GMALE = 'M'
     GFEMALE = 'F'
     GNEUTRAL = 'P'
