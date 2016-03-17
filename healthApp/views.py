@@ -202,9 +202,6 @@ def medline_search(request):
 def profile_page(request):
     user = UserProfile.objects.get(user = request.user)
     userName = User.objects.get(username = request.user)
-    dob = UserProfile.objects.get(dob = request.user)
-    email = UserProfile.objects.get(email = request.user)
-    gender = UserProfile.objects.get(gender = request.user)
     return render(request,
         'healthApp/profile_page.html',
-        {'user': user, 'username': userName, 'dob':dob, })
+        {'user': user, 'username': userName,})
