@@ -2,7 +2,20 @@
 
 {% load staticfiles %}
 
-<head>
-  <div> 
-  <title>Profile: {{user.user}}</title>
-</head>
+{% block body_block %}
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2">
+      <h1>Profile {{userProfile.username}}</h1>
+      <h3>Information:</h3>
+      {{ userProfile.forename }}
+      {{ userProfile.surname }}
+      {{ userProfile.dob }}
+      {{ userProfile.gender }}
+    </div>
+    <div class="span10">
+
+    </div>
+  </div>
+</div>
+{% endblock %}
