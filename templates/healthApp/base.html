@@ -42,7 +42,7 @@
                         <li><a href="{% url 'profile_page' %}"><span class="glyphicon glyphicon-user"></span></a></li>
 						<li><a data-toggle="modal" href="#categoryModal">Categories</a></li>
                     {% else %}
-                        <li><a href="{% url 'registration_register' %}?next=/healthApp/"">Register Here</a></li>
+                        <li><a href="{% url 'register' %}?next=/healthApp/"">Register Here</a></li>
 						<li><a data-toggle="modal" href="#loginModal">Login</a></li>
                     {% endif %}
                                 <li><a href="{% url 'about' %}">About</a></li>
