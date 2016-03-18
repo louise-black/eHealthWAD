@@ -37,13 +37,13 @@ def search_healthfinder(search_terms):
             result_url = data.accessibleversion.string
             result_title = fix_data(data.title.string)
             result_summary = fix_data(data.sections.section.description.string)
-            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary})
+            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary, 'source': "HealthFinder"})
 
         for data in parse.findAll("tool"):
             result_url = data.accessibleversion.string
             result_title = fix_data(data.title.string)
             result_summary = fix_data(data.categories.string)
-            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary})
+            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary, 'source': "HealthFinder"})
 
     # Catch a URLError exception - something went wrong when connecting!
     except urllib2.URLError as e:
