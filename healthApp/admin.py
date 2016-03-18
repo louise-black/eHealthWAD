@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 from healthApp.models import Category, Page
-
 from healthApp.models import UserProfile
+
 
 
 class PageAdmin(admin.ModelAdmin):
@@ -14,10 +14,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
-
 admin.site.register(UserProfile)
-
-
-

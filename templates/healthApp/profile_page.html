@@ -1,4 +1,4 @@
-{% extends 'healthApp/base.html'%}
+ß{% extends 'healthApp/base.html'%}
 {% load staticfiles %}
 {% block body_block %}
 <div class="container">
@@ -6,7 +6,7 @@
     <div style="position:fixed;top:65px;float:left;left:0px;"class="col-sm-3">
       <div class="panel panel-primary">
         <div class = "panel-body" style = "height:900px">
-          <h1> Profile: {{ userProfile.user }}</h1>
+          <h1> Profile: {{ user.username }}</h1>
           <h3> Information</h3>
           <ul class="list-group">
             <li class="list-group-item">Forename: {{ userProfile.forename }}</li>
