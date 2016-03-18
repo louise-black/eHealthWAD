@@ -1,10 +1,16 @@
-{% extends 'healthApp/base.html' %} {% load staticfiles %} {% block title %}Index{% endblock %} {% block body_block %} {% if user.is_authenticated %}
-<div class="page-header">
-
-  <h1>hello {{ user.username }}!</h1> {% else %}
+{% extends 'healthApp/base.html' %} 
+{% load staticfiles %} 
+{% block title %}Index{% endblock %} 
+{% block body_block %}
+ 
+	{% if user.is_authenticated %}
+		<div class="container">
+  <div class = "jumbotron">
+    <h1> hello {{ user.username }}!</h1> {% else %}
   <h1></h1> {% endif %}
 </div>
-<br>
+</div>
+	<br>
 
 
 <div class="container">
@@ -37,27 +43,6 @@
           <br />
         </form>
 
-        <div class="panel">
-          {% if result_list %}
-          <div class="panel-heading">
-            <h3 class="panel-title">Results</h3>
-            <!-- Display search results in an ordered list -->
-            <div class="panel-body">
-              <div class="list-group">
-                {% for result in result_list %}
-                <div class="list-group-item">
-                  <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a></h4>
-                  <p class="list-group-item-text">{{ result.summary }}</p>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 

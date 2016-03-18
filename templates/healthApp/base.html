@@ -9,6 +9,8 @@
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>eHealth - {% block title %}eHealth application{% endblock %}</title>
+	{% block css %}{% endblock %}
+	{% block js %}{% endblock %}
 
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="http://getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
@@ -30,18 +32,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/healthApp/">eHealth</a>
+          <a class="navbar-brand" href="{% url 'index' %}">eHealth</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
                 <li><a href="{% url 'index' %}">Home</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'auth_logout' %}?next=/accounts/logout">Logout</a></li>
-                        <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+                        <li><a href="{% url 'auth_logout' %}?next=/healthApp/">Logout</a></li>
                         <li><a href="{% url 'profile_page' %}"><span class="glyphicon glyphicon-user"></span></a></li>
+						<li><a data-toggle="modal" href="#categoryModal">Categories</a></li>
                     {% else %}
-                        <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-                        <li><a href="{% url 'auth_login' %}">Login</a></li>
+                        <li><a href="{% url 'registration_register' %}?next=/healthApp/"">Register Here</a></li>
+						<li><a data-toggle="modal" href="#loginModal">Login</a></li>
                     {% endif %}
                                 <li><a href="{% url 'about' %}">About</a></li>
 
@@ -49,6 +51,94 @@
         </div>
       </div>
     </div>
+	
+
+							
+	<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+				
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                     <h4 class="modal-title" id="myModalLabel">Login</h4>
+					 </div>
+                <div class="modal-body">
+				<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+				<form id="login_form" method="post" action="/healthApp/login/"  role="form" method="post" action=".">
+					{% csrf_token %}
+
+					<h2 class="form-signin-heading">Log in to eHealth</h2>
+					<input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+					<input type="password" class="form-control" placeholder="Password" id="id_password" name="password"  required />
+
+					<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" >Sign in</button>
+				</form>
+	<div class="modal-footer">
+                   <p>Not  a member? <a href="{% url 'registration_register' %}">Register Here!</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- End login modal -->
+
+<!-- Category Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+			
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                     <h4 class="modal-title" id="myModalLabel">Categories</h4>
+					 </div>
+					 
+                <div class="modal-body">
+					<form id="category_form" method="post" action="/healthApp/category/"  role="form" method="post" action=".">
+						<div class="row placeholders">
+							<div class="col-xs-12 col-sm-16 placeholder">
+			
+							<div class="panel panel-primary">
+								<div class="panel-heading ">
+									<h3 class="panel-title ">Categories</h3>
+								</div>
+							</div>
+			
+							<div class="field ">
+								{% if categories %}
+									<ul class="list-group">
+									{% for category in categories %}
+										<li class="list-group-item"><a href="/healthApp/category/{{ category.slug }}">{{ category.name }}</a></li>
+									{% endfor %}
+									</ul>
+								{% else %}
+									<strong>There are no categories present.</strong>
+								{% endif %}
+
+							</div>
+						</div>
+
+						</div>
+					</form>
+				</div>
+			
+				<div class="modal-footer">
+					<a href="{% url 'add_category' %}">Add a New Category</a>
+                </div>
+            
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- End Category modal -->
 
     <div class="container-fluid">
         <div class="row">

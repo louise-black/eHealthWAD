@@ -54,7 +54,7 @@ def search_medline(search_terms):
                         working_summary = working_summary.replace('<span class="qt0">', '')
                         working_summary= working_summary.replace('</span>', '')
                     result_summary = working_summary
-            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary})
+            results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary, 'source': "Medline"})
 
     # Catch a URLError exception - something went wrong when connecting!
     except urllib2.URLError as e:

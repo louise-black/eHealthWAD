@@ -11,17 +11,17 @@
     
     {% if category %}
         {% if pages %}
-        <ul>
+			<ul>
                 {% for page in pages %}
                 <li><a href="{{ page.url }}">{{ page.title }}</a></li>
                 {% endfor %}
-                </ul>
+            </ul>
         {% else %}
                 <strong>No pages currently in category.</strong>
                 {% endif %}
 
         {% if user.is_authenticated %}
-                <a href="{healthApp/category/{{category.slug}}/add_page/">Add a Page</a>
+                <a href="{{category.slug}}/add_page/">Add a Page</a>
                 {% endif %}
         {% else %}
                  The specified category {{ category_name }} does not exist!

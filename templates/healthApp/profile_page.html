@@ -1,0 +1,59 @@
+{% extends 'healthApp/base.html'%}
+{% load staticfiles %}
+{% block body_block %}
+<div class="container">
+  <div class="row">
+    <div style="position:fixed;top:65px;float:left;left:0px;"class="col-sm-3">
+      <div class="panel panel-primary">
+        <div class = "panel-body" style = "height:900px">
+          <h1> Profile: {{ userProfile.user }}</h1>
+          <h3> Information</h3>
+          <ul class="list-group">
+            <li class="list-group-item">Forename: {{ userProfile.forename }}</li>
+            <li class="list-group-item">Surname: {{ userProfile.surname }}</li>
+            <li class="list-group-item">DOB: {{ userProfile.dob }}</li>
+            <li class="list-group-item">Gender: {{ userProfile.gender }}</li>
+
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div style ="position:fixed; top:65px;float:right;left:500px; max-height:130px;max-width:600px">
+    <img src="http://afriditrust.org/wp-content/uploads/2015/10/health_bannera.jpg" class="img-responsive" alt="HealthBanner">
+  </div>
+</div>
+
+  <div class="container">
+    <div class="row">
+      <div style="position:fixed;top:210px;float:right;left:350px;"class="col-sm-8">
+        <div class="panel panel-primary">
+          <div class = "panel-body" style = "height:900px">
+            <h1>  Categories for: {{ userProfile.user }}</h1>
+            <h2>{{ category_name }}</h2>
+               {% if category %}
+                    <span class="glyphicon glyphicon-folder-open"></span><h4>{{category_name}}</h4>
+                   {% if pages %}
+                   <ul>
+                           {% for page in pages %}
+                           <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                           {% endfor %}
+                           </ul>
+                   {% else %}
+                           <strong>No pages currently in category.</strong>
+                           {% endif %}
+
+                   {% if user.is_authenticated %}
+                           <a href="{healthApp/category/{{category.slug}}/add_page/">Add a Page</a>
+                           {% endif %}
+                   {% else %}
+                            <strong>There are no categories to show!</strong>
+               {% endif %}
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
