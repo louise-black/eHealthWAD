@@ -55,12 +55,23 @@ class UserProfile(models.Model):
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
         return self.user.username
-	
+
     def was_added_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-    def create_user_profile(sender, instance, created, **kwargs):
+    def create_user_profile(sender, instance, created, **kwargs):  
         if created:
-            UserProfile.objects.create(user = instance)
+            try:  
+                profile, created = UserProfile.objects.get_or_create(user=instance)
+            except:
+                pass
     signals.post_save.connect(create_user_profile, sender = User)
+    
+    def save(self, *args, **kwargs):
+        try:
+            existing = UserProfile.objects.get(user=self.user)
+            self.id = existing.id #force update instead of insert
+        except UserProfile.DoesNotExist:
+            pass 
+        models.Model.save(self, *args, **kwargs)

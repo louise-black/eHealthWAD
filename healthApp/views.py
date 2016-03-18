@@ -103,7 +103,7 @@ def add_category(request):
     page_list = Page.objects.all()
     context_dict['categories']= category_list
     context_dict['pages'] = page_list
-    
+
     # A HTTP POST?
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -216,7 +216,7 @@ def healthfinder_search(request):
         if query:
             # Run healthfinder_search function to get the results list
             result_list = search_healthfinder(query)
-            
+
     category_list = Category.objects.all()
     page_list = Page.objects.all()
     context_dict = {'categories': category_list, 'pages': page_list,'result_list': result_list}

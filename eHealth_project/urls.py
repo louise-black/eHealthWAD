@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^healthApp/', include('healthApp.urls')),
         #Add in this url pattern to override the default pattern in accounts.
-    url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
+    #url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 )
 

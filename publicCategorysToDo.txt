@@ -1,0 +1,14 @@
+- add foreign key (user) to category in models.py
+- add public field (0 for private, 1 for public) to category in models.py
+- add slugify thing to user - self.slug = slugify(self.username) ??? in models.py
+- change category in views.py so:
+	-if category is private & the user logged in != category.user then the page is not displayed
+		if category.public == 0 and category.user != <current user>:
+		    context_dict={}
+- change urls, 2 options:
+	-change how we do categories to healthApp/<username>/category/<categoryname> i.e. "healthApp/jill/category/cancer"
+		-change url(r'^category/(?P<category_name_slug>\w+)$', views.category, name='category') to
+		 url(r'^(?P<user_name_slug\w+>/category/<?P<category_name_slug>\w+)$', views.category, name = 'category')
+
+	-make a new url pattern, same as above, and keep the old pattern as well (though maybe this means people can view other peoples
+	categories)
