@@ -43,16 +43,12 @@ def search_medline(search_terms):
                 if tag["name"] == "title":
                     working_title = tag.string
                     working_title = urllib2.unquote(working_title)
-                    if '<span class="qt0">' in working_title:
-                        working_title = working_title.replace('<span class="qt0">', '')
-                        working_title = working_title.replace('</span>', '')
+                    working_title = fix_data(working_title)
                     result_title = working_title
                 if tag["name"] == "snippet":
                     working_summary = tag.string
                     working_summary = urllib2.unquote(working_summary)
-                    if '<span class="qt0">' in working_summary:
-                        working_summary = working_summary.replace('<span class="qt0">', '')
-                        working_summary= working_summary.replace('</span>', '')
+                    working_summary = fix_data(working_summary)
                     result_summary = working_summary
             results_data.append({'title': result_title, 'link': result_url, 'summary':result_summary, 'source': "Medline"})
 
@@ -62,3 +58,11 @@ def search_medline(search_terms):
 
     # Return the list of results to the calling function.
     return results_data
+
+def fix_data(data):
+    new_data = data
+    corrections = ['</span>', '<span class="qt0">', '<span class="qt1">', '<span class="qt2">', '<span class="qt3">', ]
+    for code in corrections:
+        if code in data:
+            new_data = new_data.replace(code, '')
+    return new_data
