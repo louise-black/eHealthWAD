@@ -13,7 +13,13 @@
         {% if pages %}
 			<ul>
                 {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                <li>
+				<a href="{{ page.url }}">{{ page.title }} <p> 
+				 <input type="submit" name="del_btn" value="Delete"/>
+				<a href="/healthApp/category/{{ category.slug }}/delete_page{{category.id}}" target="_blank">
+								<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+							</a>
+				</a></li>
                 {% endfor %}
             </ul>
         {% else %}

@@ -163,6 +163,14 @@ def add_page(request, category_name_slug):
 
     return render(request, 'healthApp/add_page.html', context_dict)
 
+from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
+
+
+def delete_page(request, id):
+    page = get_object_or_404(Page, pk=id).delete()
+    return HttpResponseRedirect(reverse('category.views.category'))
+
 
 from healthApp.bing_search import search_bing
 from healthApp.healthfinder_search import search_healthfinder

@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^profile_page/$', views.profile_page, name = 'profile_page'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^register/$', views.register, name='register'),
+    url(r'^category/(?P<category_name_slug>\w+)/delete_page/(?P<id>\d+)/$',views.delete_page,name= 'delete_page'),
     )
