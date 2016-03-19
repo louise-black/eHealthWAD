@@ -176,7 +176,6 @@ def search(request):
     if request.method == 'POST':
         query = request.POST['query'].strip()
 
-        print query
 
         if query:
             # Run bing_search function to get the results list
