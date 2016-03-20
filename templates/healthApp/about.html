@@ -6,25 +6,22 @@
 
 {% block body_block %}
 
-    <div class="page-header">
-                <h1>About</h1>
-            </div>
-            <div>
-            <p></strong>.</p>
-
-            <img  width="90" height="100" src="{% static "images/healthApp.jpg" %}" alt="Picture of Health" /> 
-            </div>
-	<br>
-	<br>
-	This is eHealth's about page!
-	<br>
-	Here's a picture of health !
-	<br>
-	<br>
-	<div id="footer">
-      <div class="container">
-        <p class="text-muted credit"> visits: {{ visits }}</p>
+    <div class = "container">
+		<div style ="position:relative; margin-left: auto; margin-right: auto">
+			<img src="http://web.iit.edu/sites/web/files/field_uploads/slideshow/full-body-slide/2015/main_home1_770x350.jpg" class="img-responsive" alt="eHealth">
+		</div>
+	</div>
+	<br><br><br><br>
+	<div class="container" style ="position:relative; margin-left: auto; margin-right: auto">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel">
+        <div class="panel-heading">What is eHealth?</div>
+        <div class="panel-body">
+          eHealth is a non-profit health application that allows users to search a various amount of health-related queries, and they get results from different locations, mainly Bing, Medline and HealthFinder. Create an account now to save your results and create
+          a neat folder system of all your query results.
+        </div>
       </div>
     </div>
-	
+
 {% endblock %}
