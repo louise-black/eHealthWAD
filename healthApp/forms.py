@@ -56,6 +56,15 @@ class PageForm(forms.ModelForm):
 
         return cleaned_data
 
+class EditProfile(forms.ModelForm):
+    email = forms.EmailField(label = 'Email')
+    forename = forms.CharField(label = 'Forename')
+    surname = forms.CharField(label = 'Surname')
+    class Meta:
+        model = UserProfile
+        fields = ('email', 'forename','surname')
+
+
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 

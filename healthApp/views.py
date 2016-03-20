@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from healthApp.models import Category, Page
+from healthApp.models import Category, Page, UserProfile
 from datetime import datetime
 
 from django.contrib.auth import authenticate, login
@@ -175,7 +175,7 @@ def search(request):
 
     if request.method == 'POST':
         query = request.POST['query'].strip()
-        
+
         if query:
             # Run bing_search function to get the results list
             result_list = search_all(query)
@@ -237,15 +237,22 @@ def medline_search(request):
     context_dict = {'categories': category_list, 'pages': page_list,'result_list': result_list}
 
     return render(request, 'healthApp/medline_search.html', context_dict)
+
 def profile_page(request):
-    userProfile = UserProfile.objects.get(user = request.user)
-    category_list = Category.objects.all()
-    page_list = Page.objects.all()
-    context_dict = {'categories': category_list, 'pages': page_list,'userProfile': userProfile}
+    userProfile = UserProfile.objects.get(user = request.userProfile)
+    category_list = Category.objects.filter(user=request.user)
+    data_return = []
+    for c in category_list:
+        data = {'name': c.name, 'pages':[]}
+        page_list = Pages.objects.filter(category = c)
+        for p in page_list:
+            data['pages'].append(p)
+        data_return.append(data)
 
     return render(request,
         'healthApp/profile_page.html',
-        context_dict)
+        data_return)
+
 
 def register(request):
 
@@ -304,6 +311,17 @@ def register(request):
             'healthApp/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
+def editProfile(request):
+    userProfile = UserProfile.objects.get(user = request.user)
+    form = EditProfile(request.POST, initial = {'forename': userProfile.forename, 'surname': userProfile.surname, 'email': userProfile.email})
+    if form.is_valid():
+        userProfile.forename = request.POST['forename']
+        userProfile.surname = request.POST['surname']
+        userProfile.email = request.POST['email']
+        userProfile.save()
+        return HttpResponseRedirect('healthApp/profile_page.html')
+    context_dict = {"form":form}
+    return render (request, "healthApp/edit_profile.html", context_dict)
 
 def user_login(request):
 
