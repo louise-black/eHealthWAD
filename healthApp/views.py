@@ -175,11 +175,7 @@ def search(request):
 
     if request.method == 'POST':
         query = request.POST['query'].strip()
-
-<<<<<<< HEAD
-
-=======
->>>>>>> a329c55383f1178a012f0d1862bb44443027836b
+        
         if query:
             # Run bing_search function to get the results list
             result_list = search_all(query)

@@ -33,6 +33,8 @@ class Page(models.Model):
     title = models.CharField(max_length=128)
     url = models.URLField()
     views = models.IntegerField(default=0)
+    
+    
     readability = models.IntegerField(default=0)
     subjectivity = models.IntegerField(default=0)
     polarity = models.IntegerField(default=0)
@@ -64,3 +66,13 @@ class UserProfile(models.Model):
         if created:
             UserProfile.objects.create(user = instance)
     signals.post_save.connect(create_user_profile, sender = User)
+
+    def save(self, *args, **kwargs):
+        try:
+            existing = UserProfile.objects.get(user=self.user)
+            self.id = existing.id #force update instead of insert
+        except UserProfile.DoesNotExist:
+            pass 
+        models.Model.save(self, *args, **kwargs)
+
+

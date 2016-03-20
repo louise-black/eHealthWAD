@@ -42,7 +42,7 @@
                         <li><a href="{% url 'profile_page' %}"><span class="glyphicon glyphicon-user"></span></a></li>
 						<li><a data-toggle="modal" href="#categoryModal">Categories</a></li>
                     {% else %}
-                        <li><a href="{% url 'register' %}?next=/healthApp/"">Register Here</a></li>
+                        <li><a href="{% url 'register' %}?next=/healthApp/">Register Here</a></li>
 						<li><a data-toggle="modal" href="#loginModal">Login</a></li>
                     {% endif %}
                                 <li><a href="{% url 'about' %}">About</a></li>
@@ -68,7 +68,7 @@
 					 </div>
                 <div class="modal-body">
 				<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
-				<form id="login_form" method="post" action="/healthApp/login/"  role="form" method="post" action=".">
+				<form id="login_form" method="post" action="/healthApp/login/"  role="form" method="post" >
 					{% csrf_token %}
 
 					<h2 class="form-signin-heading">Log in to eHealth</h2>
@@ -78,7 +78,7 @@
 					<button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit" >Sign in</button>
 				</form>
 	<div class="modal-footer">
-                   <p>Not  a member? <a href="{% url 'registration_register' %}">Register Here!</a></p>
+                   <p>Not  a member? <a href="{% url 'register' %}">Register Here!</a></p>
                 </div>
             </div>
         </div>

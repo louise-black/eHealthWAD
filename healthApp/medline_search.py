@@ -65,8 +65,6 @@ def fix_data(data):
     for code in corrections:
         if code in data:
             new_data = new_data.replace(code, '')
-<<<<<<< HEAD
+
     return new_data
-=======
-    return new_data
->>>>>>> a329c55383f1178a012f0d1862bb44443027836b
+

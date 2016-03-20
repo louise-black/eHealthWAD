@@ -13,7 +13,9 @@
         {% if pages %}
 			<ul>
                 {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+                <li>
+				<a href="{{ page.url }}">{{ page.title }}</a>
+				</li>
                 {% endfor %}
             </ul>
         {% else %}
@@ -28,6 +30,5 @@
     {% endif %}
 	<br>
 	<br>
-	<a href="/healthApp/">Home page</a>
 {% endblock %}
 		
