@@ -12,3 +12,5 @@
 Lab 01 Monday 1pm-3pm Group A
   
 University of Glasgow Computer Science
+
+Our projects population script is there, however it doesn't run properly and we didn't have enough time to figure out why. 
