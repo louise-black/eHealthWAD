@@ -41,7 +41,8 @@ class UserProfile(models.Model):
         models.Model.save(self, *args, **kwargs)
 
 class Category(models.Model):
-    name = models.CharField(max_length=128, unique=True)
+    #not unique!!!!!
+    name = models.CharField(max_length=128)
     views = models.IntegerField(default=0)
     user = models.ForeignKey(User, null = True)
     slugCat = models.SlugField()

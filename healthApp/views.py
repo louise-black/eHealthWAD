@@ -87,7 +87,7 @@ def category(request, user_name_slug, category_name_slug):
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        category = Category.objects.get(slugCat=category_name_slug)
+        category = Category.objects.get(slugCat=category_name_slug, slugUser = user_name_slug)
         context_dict['category_name'] = category.name
         private = category.pubOrPriv
 
@@ -115,18 +115,25 @@ def category(request, user_name_slug, category_name_slug):
     try:
         if request.user.profile.slug != user_name_slug and private == "PRIV":
             context_dict = []
+            print "user access not granted"
     except AttributeError:
-        context_dict = []
+        if private == "PRIV":
+            context_dict = []
+        #print "error"
+
+    print context_dict
 
     # Go render the response and return it to the client.
     return render(request, 'healthApp/category.html', context_dict)
 
 def add_category(request):
+    #if category.name = category.name and cat.user = user NONO
     context_dict = {}
     category_list = Category.objects.all()
     page_list = Page.objects.all()
     context_dict['categories']= category_list
     context_dict['pages'] = page_list
+    categoryUnique = True
 
     # A HTTP POST?
     if request.method == 'POST':
@@ -140,7 +147,14 @@ def add_category(request):
             category = form.save(commit=True)
             category.user = request.user
             category.slugUser = slugify(request.user.username)
-            category.save()
+            for c in category_list:
+                if c.name == category.name and c.user == category.user:
+                    categoryUnique = False
+
+            if categoryUnique:
+                category.save()
+            else:
+                print "category name not unique within user"
 
             # Now call the index() view.
             # The user will be shown the homepage.

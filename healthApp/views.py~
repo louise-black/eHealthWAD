@@ -115,18 +115,25 @@ def category(request, user_name_slug, category_name_slug):
     try:
         if request.user.profile.slug != user_name_slug and private == "PRIV":
             context_dict = []
+            print "user access not granted"
     except AttributeError:
-        context_dict = []
+        if private == "PRIV":
+            context_dict = []
+        #print "error"
+
+    print context_dict
 
     # Go render the response and return it to the client.
     return render(request, 'healthApp/category.html', context_dict)
 
 def add_category(request):
+    #if category.name = category.name and cat.user = user NONO
     context_dict = {}
     category_list = Category.objects.all()
     page_list = Page.objects.all()
     context_dict['categories']= category_list
     context_dict['pages'] = page_list
+    categoryUnique = True
 
     # A HTTP POST?
     if request.method == 'POST':
@@ -140,7 +147,14 @@ def add_category(request):
             category = form.save(commit=True)
             category.user = request.user
             category.slugUser = slugify(request.user.username)
-            category.save()
+            for c in category_list:
+                if c.name == category.name and c.user == category.user:
+                    categoryUnique = False
+
+            if categoryUnique:
+                category.save()
+            else:
+                print "category name not unique within user"
 
             # Now call the index() view.
             # The user will be shown the homepage.
@@ -268,10 +282,7 @@ def medline_search(request):
 
 def profile_page(request):
 
-    #Rebecca
-    #before: userProfile = UserProfile.objects.get(user = request.UserProfile)
     user = request.user.profile
-    #category_list = Category.objects.filter(user=request.user)
     category_list = Category.objects.all()
     cat_list = []
     page_list = []
@@ -283,7 +294,6 @@ def profile_page(request):
             page_list.append(Page.objects.all().filter(category=c))
 
     context_dict = {"categories":cat_list, "pages":page_list}
-    print context_dict
     return render(request,
         'healthApp/profile_page.html',
         context_dict)
@@ -350,7 +360,7 @@ def register(request):
 
 def editProfile(request):
     userProfile = UserProfile.objects.get(user = request.user)
-    form = EditProfileForm(request.POST, initial = {'forename': userProfile.forename, 'surname': userProfile.surname, 'email': userProfile.email})
+    form = EditProfileForm(request.POST, initial = {'forename': userProfile.forename, 'surname': userProfile.surname, 'email': 			userProfile.email})
     if form.is_valid():
         userProfile.forename = request.POST['forename']
         userProfile.surname = request.POST['surname']
