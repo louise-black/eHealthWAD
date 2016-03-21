@@ -10,7 +10,7 @@ class PageAdmin(admin.ModelAdmin):
 
 # Add in this class to customized the Admin Interface
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug':('name',)}
+    prepopulated_fields = {'slugCat':('name',)}
 
 
 

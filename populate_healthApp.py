@@ -11,14 +11,14 @@ def populate():
 
     add_user(username='jill',
              password = 'jill',
-             dob = 01/03/1988
+             dob = 01/03/1988,
              email = 'jill@gmail.com',
              forename = 'Jill',
-             surname = 'Jill'
-             gender = 'F'
+             surname = 'Jill',
+             gender = 'F',
              )
-    add_user (username = 'jim'
-              password = 'jim'
+    add_user (username = 'jim',
+              password = 'jim',
               dob = 02/04/1996,
               email = 'jim@gmail.com',
               forename = 'Jim',
@@ -28,11 +28,12 @@ def populate():
     add_user (username = 'joe',
               password = 'joe',
               dob = 06/12/1990,
-              email = 'joe@gmail.com'
+              email = 'joe@gmail.com',
               forename = 'Joe',
-              surname = 'Joe'
+              surname = 'Joe',
               gender = 'M')
               
+#Rebecca take out username attrib
 def add_user(username, password, dob, email, forename, surname, gender):
     u = UserProfile.objects.get_or_create(
         username = username,

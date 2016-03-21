@@ -1,0 +1,53 @@
+{% extends 'healthApp/base.html'%}
+{% load staticfiles %}
+{% block body_block %}
+<div class="container">
+  <div class="row">
+    <div style="position:fixed;top:65px;float:left;left:0px;"class="col-sm-3">
+      <div class="panel panel-primary">
+        <div class = "panel-body" style = "height:900px">
+          <h1> Profile: {{ user.username }}</h1>
+          <h3> Information</h3>
+          <ul class="list-group">
+            <!-- Rebecca before: Forename: {{ userProfile.forename }}, after: Forename: {{ request.user.forename }} -->
+            <!-- let's display the email, maybe the forms aren't submitting the non vital info? -->
+            <!-- so the forms are the problem -->
+            <li class="list-group-item">Forename: {{ user.profile.forename }}</li>
+            <li class="list-group-item">Surname: {{ user.profile.surname }}</li>
+            <li class="list-group-item">DOB: {{ user.profile.dob }}</li>
+            <li class="list-group-item">Gender: {{ user.profile.gender }}</li>
+          </ul>
+          <a href="{% url 'edit_profile' %}"><button type="button" class="btn btn-primary">Edit Profile Information</button></a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class = "container">
+    <div style ="position:fixed; top:65px;float:right;left:500px; max-height:130px;max-width:600px">
+    <img src="http://afriditrust.org/wp-content/uploads/2015/10/health_bannera.jpg" class="img-responsive" alt="HealthBanner">
+  </div>
+</div>
+
+  <div class="container">
+    <div class="row">
+      <div style="position:fixed;top:210px;float:right;left:350px;"class="col-sm-8">
+        <div class="panel panel-primary">
+          <div class = "panel-body" style = "height:900px">
+            <!-- Rebecca before: {{ userProfile.username }}, after: {{ user.username }} -->
+            <h1>  Categories for: {{ user.username }}</h1>
+               {% for c in categories %}
+                  <li><h2><a href="/healthApp/category/{{ c.slugUser }}/{{ c.slugCat }}"> name: {{ c.name }}</h2></li>
+                  {% for p in pages %}
+			{% if p.category == c %}
+				<li> <h3> title: {{ p.title }} </h3> 
+			{% endif %}
+              	  {% endfor %}
+              {% endfor %}
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}

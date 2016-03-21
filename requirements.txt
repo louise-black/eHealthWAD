@@ -1,0 +1,12 @@
+The following packages are needed to run this application:
+
+Django 1.7
+django-registration-redux 1.4
+django-profiles 0.2
+Pillow 3.1.1
+pip 8.0.2
+setuptools 19.6.2
+textstat 0.2
+textblob 0.11.1
+wheel 0.26.0
+beautifulsoup4 4.4.1

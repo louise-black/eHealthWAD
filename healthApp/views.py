@@ -1,17 +1,26 @@
 from django.shortcuts import render
 from healthApp.models import Category, Page, UserProfile
 from datetime import datetime
+from django.template.defaultfilters import slugify
+from pageProcess import process
 
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 
-from healthApp.forms import CategoryForm, PageForm
+from healthApp.forms import CategoryForm, PageForm, EditProfileForm
 
 from healthApp.forms import UserForm, UserProfileForm, UserProfile, User
 
 def index(request):
 
+    #Rebecca gonna check if user is authenticated
+    user = request.user
+    
+
     category_list = Category.objects.all()
+
+    for c in category_list:
+        print c.slugUser
     page_list = Page.objects.all()
     context_dict = {'categories': category_list, 'pages': page_list}
 
@@ -64,7 +73,7 @@ def about(request):
     # remember to include the visit data
     return render(request, 'healthApp/about.html', context_dict)
 
-def category(request, category_name_slug):
+def category(request, user_name_slug, category_name_slug):
 
     # Create a context dictionary which we can pass to the template rendering engine.
     context_dict = {}
@@ -72,27 +81,42 @@ def category(request, category_name_slug):
     page_list = Page.objects.all()
     context_dict['categories']= category_list
     context_dict['pages'] = page_list
+    private = "PRIV"
 
     try:
         # Can we find a category name slug with the given name?
         # If we can't, the .get() method raises a DoesNotExist exception.
         # So the .get() method returns one model instance or raises an exception.
-        category = Category.objects.get(slug=category_name_slug)
+        category = Category.objects.get(slugCat=category_name_slug)
         context_dict['category_name'] = category.name
+        private = category.pubOrPriv
 
         # Retrieve all of the associated pages.
         # Note that filter returns >= 1 model instance.
         pages = Page.objects.filter(category=category)
+
+
+        #score time
+        for i in range (0,len(pages)):
+            pages[i].subjectivity, pages[i].polarity, pages[i].readability = process(pages[i].url)
 
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
         # We also add the category object from the database to the context dictionary.
         # We'll use this in the template to verify that the category exists.
         context_dict['category'] = category
+
+        
     except Category.DoesNotExist:
         # We get here if we didn't find the specified category.
         # Don't do anything - the template displays the "no category" message for us.
         pass
+
+    try:
+        if request.user.profile.slug != user_name_slug and private == "PRIV":
+            context_dict = []
+    except AttributeError:
+        context_dict = []
 
     # Go render the response and return it to the client.
     return render(request, 'healthApp/category.html', context_dict)
@@ -111,7 +135,12 @@ def add_category(request):
         # Have we been provided with a valid form?
         if form.is_valid():
             # Save the new category to the database.
-            form.save(commit=True)
+            #Rebecca adding user attributes
+
+            category = form.save(commit=True)
+            category.user = request.user
+            category.slugUser = slugify(request.user.username)
+            category.save()
 
             # Now call the index() view.
             # The user will be shown the homepage.
@@ -129,7 +158,6 @@ def add_category(request):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'healthApp/add_category.html', context_dict)
-
 
 def add_page(request, category_name_slug):
     context_dict = {}
@@ -239,19 +267,22 @@ def medline_search(request):
     return render(request, 'healthApp/medline_search.html', context_dict)
 
 def profile_page(request):
-    userProfile = UserProfile.objects.get(user = request.userProfile)
-    category_list = Category.objects.filter(user=request.user)
-    data_return = []
-    for c in category_list:
-        data = {'name': c.name, 'pages':[]}
-        page_list = Pages.objects.filter(category = c)
-        for p in page_list:
-            data['pages'].append(p)
-        data_return.append(data)
 
+    user = request.user.profile
+    category_list = Category.objects.all()
+    cat_list = []
+    page_list = []
+    pages_list = Page.objects.all()
+    context_dict = {"categories":cat_list, "pages":page_list}
+    for c in category_list:
+        if c.user == request.user:
+            cat_list.append(c)
+            page_list.append(Page.objects.all().filter(category=c))
+
+    context_dict = {"categories":cat_list, "pages":page_list}
     return render(request,
         'healthApp/profile_page.html',
-        data_return)
+        context_dict)
 
 
 def register(request):
@@ -289,7 +320,9 @@ def register(request):
                 profile.picture = request.FILES['picture']
 
             # Now we save the UserProfile model instance.
+            profile.slug = slugify(user.username)
             profile.save()
+            print "profile saved"
 
             # Update our variable to tell the template registration was successful.
             registered = True
@@ -313,7 +346,7 @@ def register(request):
 
 def editProfile(request):
     userProfile = UserProfile.objects.get(user = request.user)
-    form = EditProfile(request.POST, initial = {'forename': userProfile.forename, 'surname': userProfile.surname, 'email': userProfile.email})
+    form = EditProfileForm(request.POST, initial = {'forename': userProfile.forename, 'surname': userProfile.surname, 'email': 			userProfile.email})
     if form.is_valid():
         userProfile.forename = request.POST['forename']
         userProfile.surname = request.POST['surname']

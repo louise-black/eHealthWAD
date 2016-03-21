@@ -1,0 +1,11 @@
+Add tabs to search page
+Fix the database (make categories part of user, give public/private field)
+Categories public/private - 
+					Change URL's, give user username slug in models,
+					Change Views - Add exception for not public
+Make some tests
+Create a delete link option
+Create a save button for every link displayed in the save, that saves the link with the url and title from the page
+Be able to text process the pages 
+Display the pages on the profile page
+Create an edit profile option 

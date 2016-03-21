@@ -1,0 +1,30 @@
+{% extends 'healthApp/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body_block %}
+
+    <div class="page-header">
+                <h1>About</h1>
+            </div>
+            <div>
+            <p></strong>.</p>
+
+            <img  width="90" height="100" src="{% static "images/healthApp.jpg" %}" alt="Picture of Health" /> 
+            </div>
+	<br>
+	<br>
+	This is eHealth's about page!
+	<br>
+	Here's a picture of health !
+	<br>
+	<br>
+	<div id="footer">
+      <div class="container">
+        <p class="text-muted credit"> visits: {{ visits }}</p>
+      </div>
+    </div>
+	
+{% endblock %}

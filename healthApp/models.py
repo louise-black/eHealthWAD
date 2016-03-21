@@ -16,10 +16,11 @@ class UserProfile(models.Model):
     GNEUTRAL = 'P'
     GCHOICES = [(GMALE, 'Male'), (GFEMALE, 'Female'), (GNEUTRAL, 'Gender fluid')]
     gender = models.CharField(max_length = 1, default = 'P', choices = GCHOICES)
+    slug = models.SlugField(default='')
 
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
-        return self.user.username
+        return self.user
 
     def was_added_recently(self):
         now = timezone.now()
@@ -28,6 +29,7 @@ class UserProfile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             UserProfile.objects.create(user = instance)
+
     signals.post_save.connect(create_user_profile, sender = User)
 
     def save(self, *args, **kwargs):
@@ -42,7 +44,12 @@ class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
     views = models.IntegerField(default=0)
     user = models.ForeignKey(User, null = True)
-    slug = models.SlugField()
+    slugCat = models.SlugField()
+    slugUser = models.SlugField(default = '')
+    public = "PUB"
+    private = "PRIV"
+    publicChoice = [(public, "public"), (private, "private")]
+    pubOrPriv = models.CharField(max_length = 4, default = "PRIV", choices = publicChoice)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -51,7 +58,7 @@ class Category(models.Model):
         # Uncomment if you don't want the slug to change every time the name changes
         #if self.id is None:
             #self.slug = slugify(self.name)
-        self.slug = slugify(self.name)
+        self.slugCat = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
         if self.views<0:

@@ -1,0 +1,62 @@
+{% extends 'healthApp/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ category_name }}{% endblock %}
+{% block body_block %}
+ <div class="page-header">
+                <h1>{{ category_name }}</h1>
+            </div>
+    {% if category %}
+        {% if pages %}
+		<div class="container" style ="position:relative; margin-left: auto; margin-right: auto">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="panel">
+						<div class="panel-heading"></div>
+				<div class="panel-body">
+					<table>
+					<tr>
+						{% for page in pages %}
+					
+					<div class="panel panel-warning">
+					<ul>
+						<li>
+							<h2>{{ page.title }}</h2>
+						</li>
+						<li>
+							<a href="{{ page.url }}">{{ page.url }}</a>
+						</li>
+						<li>
+							<h4>Subjectivity: {{ page.subjectivity }}</h4>
+							<h7>0 = very subjective, 100 = not subjective at all</h7>
+						</li>
+						<li>
+							<h4>Polarity: {{ page.polarity }}</h4>
+						</li>
+						<li>
+							<h4>Readability: {{ page.readability }}</h4>
+						</li>
+						
+					</ul>
+					</div>
+							
+				
+                {% endfor %}
+            </tr>
+			</table>
+        </div>
+      </div>
+    </div>
+			
+        {% else %}
+                <strong>No pages currently in category.</strong>
+                {% endif %}
+        {% if user.is_authenticated %}
+				<a href="{{category.slug}}/add_page/" class="btn btn-primary" role="button">Add a page</a>
+                {% endif %}
+        {% else %}
+                 The specified category {{ category_name }} does not exist!
+    {% endif %}
+	<br>
+	<br>
+{% endblock %}
+		
