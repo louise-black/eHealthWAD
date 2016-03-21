@@ -5,6 +5,7 @@
   <form method = "POST" action = "{% url 'edit_profile'%}" class = ""/>
     {%csrf_token %}
     {{form.as_p}}
-    <button type="button" class="btn btn-primary">Save</button>
+    <!-- how do I get this to link to the profile page?-->
+    <button type="submit">Submit</button>
   </form>
 {% endblock %}

@@ -21,8 +21,11 @@ def search_all(search_terms):
     pointer = 0
     for x in range(len(smallest_data)):
         results_data.append(lists[0][x])
+        #lists[0].remove(lists[0][x])
         results_data.append(lists[1][x])
+        #lists[1].remove(lists[1][x])
         results_data.append(lists[2][x])
+        #lists[2].remove(lists[2][x])
         pointer = x
     lists.remove(smallest_data)
 
@@ -35,7 +38,7 @@ def search_all(search_terms):
     lists.remove(smallest_data)
 
     for z in range(pointer, len(lists[0])):
-        results_data.append(lists[0])
+        results_data.append(lists[0][z])
 
     return results_data
 

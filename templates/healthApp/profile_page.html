@@ -9,10 +9,10 @@
           <h1> Profile: {{ user.username }}</h1>
           <h3> Information</h3>
           <ul class="list-group">
-            <li class="list-group-item">Forename: {{ userProfile.forename }}</li>
-            <li class="list-group-item">Surname: {{ userProfile.surname }}</li>
-            <li class="list-group-item">DOB: {{ userProfile.dob }}</li>
-            <li class="list-group-item">Gender: {{ userProfile.gender }}</li>
+            <li class="list-group-item">Forename: {{ user.profile.forename }}</li>
+            <li class="list-group-item">Surname: {{ user.profile.surname }}</li>
+            <li class="list-group-item">DOB: {{ user.profile.dob }}</li>
+            <li class="list-group-item">Gender: {{ user.profile.gender }}</li>
           </ul>
           <a href="{% url 'edit_profile' %}"><button type="button" class="btn btn-primary">Edit Profile Information</button></a>
         </div>
@@ -32,12 +32,14 @@
       <div style="position:fixed;top:210px;float:right;left:350px;"class="col-sm-8">
         <div class="panel panel-primary">
           <div class = "panel-body" style = "height:900px">
-            <h1>  Categories for: {{ userProfile.username }}</h1>
-               {% for c in data_return %}
-                  <li> {{c.name}}</li>
-                  {% for p in c.pages %}
-                  <li> {{p.name}} </li>
-              {% endfor %}
+            <h1>  Categories for: {{ user.username }}</h1>
+               {% for c in categories %}
+                  <li><h2><a href="/healthApp/category/{{ c.slugUser }}/{{ c.slugCat }}"> name: {{ c.name }}</h2></li>
+                  {% for p in pages %}
+			{% if p.category == c %}
+				<li> <h3> title: {{ p.title }} </h3> 
+			{% endif %}
+              	  {% endfor %}
               {% endfor %}
           </div>
         </div>

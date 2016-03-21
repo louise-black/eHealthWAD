@@ -13,7 +13,7 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         # Provide an association between the ModelForm and a model
         model = Category
-        fields = ('name',)
+        fields = ('name','pubOrPriv')
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -56,7 +56,7 @@ class PageForm(forms.ModelForm):
 
         return cleaned_data
 
-class EditProfile(forms.ModelForm):
+class EditProfileForm(forms.ModelForm):
     email = forms.EmailField(label = 'Email')
     forename = forms.CharField(label = 'Forename')
     surname = forms.CharField(label = 'Surname')

@@ -217,13 +217,17 @@
 				{% if categories %}
                     <ul class="list-group">
 						{% for category in categories %}
-							<li class="list-group-item"><a href="/healthApp/category/{{ category.slug }}">{{ category.name }}</a>
-							<p>
-							<button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#savePageModal" aria-label="Left Align">
-							<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-							</button>
-							</p>
-							</li>
+							{% if category.user == user %}
+								<li class="list-group-item">{{ category.name }}
+								<p>
+                                <a href="/healthApp/category/{{ category.slugUser }}/{{ category.slugCat }}/add_page">
+							    <button type="button" class="btn btn-default btn-md" >
+							    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+							    </button>
+                                </a>
+							    </p>
+								</li>
+							{% endif %}
 						{% endfor %}
                     </ul>
                 {% else %}

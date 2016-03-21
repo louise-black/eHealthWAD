@@ -115,7 +115,10 @@
 								{% if categories %}
 									<ul class="list-group">
 									{% for category in categories %}
-										<li class="list-group-item"><a href="/healthApp/category/{{ category.slug }}">{{ category.name }}</a></li>
+									<!-- Rebecca add if for if user=user-->
+										{% if user == category.user %}
+											<li class="list-group-item"><a href="/healthApp/category/{{ category.slugUser }}/{{ category.slugCat }}">{{ category.name }}</a></li>
+										{% endif %}
 									{% endfor %}
 									</ul>
 								{% else %}
