@@ -11,8 +11,8 @@
   
 Lab 01 Monday 1pm-3pm Group A
   
-University of Glasogw
+University of Glasgow
 
 Our projects population script is there, however it doesn't run properly and we didn't have enough time to figure out why. 
 
-
+Since the demonstration the search page has been edited to include a sidebar containing the users categories.
