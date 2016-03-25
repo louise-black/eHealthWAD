@@ -9,10 +9,9 @@
 
 	maria96p  Maria Papadopoulou 2136603P
   
-Lab 01 Monday 1pm-3pm Group A
-  
-University of Glasgow
+Lab 01 Monday 1pm-3pm Group A   University of Glasgow
 
 Since the demonstration the search page has been edited to include a sidebar containing the users categories.
+Fixed population script
 
 Deployed at: http://louiseblack.pythonanywhere.com/healthApp/
